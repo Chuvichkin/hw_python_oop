@@ -6,20 +6,19 @@ class InfoMessage:
                  distance: float,
                  speed: float,
                  calories: float
-                 ) -> str:
+                 ) -> None:
         self.training_type = training_type
         self.duration = duration
         self.distance = distance
         self.speed = speed
         self.calories = calories
 
-    def get_message(self) -> str:
-        msg = (f'Тип тренировки: {self.training_type};'
-               f' Длительность: {self.duration:.3f} ч.;'
-               f' Дистанция: {self.distance:.3f} км;'
-               f' Ср. скорость: {self.speed:.3f} км/ч;'
-               f' Потрачено ккал: {self.calories:.3f}.')
-        return msg
+    def get_message(self):
+        print(f'Тип тренировки: {self.training_type};'
+              f' Длительность: {self.duration} ч.;'
+              f' Дистанция: {self.distance} км;'
+              f' Ср. скорость: {self.speed} км/ч;'
+              f' Потрачено ккал: {self.calories}.')
     pass
 
 
@@ -139,10 +138,9 @@ def read_package(workout_type: str, data: list) -> Training:
     return dict1[workout_type](*data)
 
 
-def main(training: Training) -> None:
+def main(training: Training):
     """Главная функция."""
     info = Training.show_training_info(training)
-    # return InfoMessage.get_message(info)
     print(InfoMessage.get_message(info))
 
 
