@@ -44,17 +44,16 @@ class Training:
         pass
 
     def show_training_info(self) -> InfoMessage:
-        type_training = self.__class__.__name__
         duration = self.duration
         distance = self.get_distance()
         speed = self.get_mean_speed()
         calories = self.get_spent_calories()
-        return InfoMessage(type_training, duration, distance, speed, calories)
+        return InfoMessage(self.__class__.__name__, duration, distance, speed, calories)
 
 
 class Running(Training):
-    coeff_calorie_1 = 18
-    coeff_calorie_2 = 20
+    RUN_COEFF_CALORIE_1 = 18
+    RUN_COEFF_CALORIE_2 = 20
 
     def __init__(self,
                  action: int,
@@ -64,15 +63,15 @@ class Running(Training):
         super().__init__(action, duration, weight)
 
     def get_spent_calories(self) -> float:
-        spent_calories = ((self.coeff_calorie_1 * self.get_mean_speed()
-                          - self.coeff_calorie_2) * self.weight / self.M_IN_KM
+        spent_calories = ((self.RUN_COEFF_CALORIE_1 * self.get_mean_speed()
+                          - self.RUN_COEFF_CALORIE_2) * self.weight / self.M_IN_KM
                           * self.duration * 60)
         return spent_calories
 
 
 class SportsWalking(Training):
-    coeff_calorie_1 = 0.035
-    coeff_calorie_2 = 0.029
+    WALK_COEFF_CALORIE_1 = 0.035
+    WALK_COEFF_CALORIE_2 = 0.029
 
     def __init__(self,
                  action: int,
@@ -84,9 +83,9 @@ class SportsWalking(Training):
         self.height = height
 
     def get_spent_calories(self) -> float:
-        spent_calories = ((self.coeff_calorie_1 * self.weight
+        spent_calories = ((self.WALK_COEFF_CALORIE_1 * self.weight
                           + (self.get_mean_speed()**2 // self.height)
-                          * self.coeff_calorie_2 * self.weight)
+                          * self.WALK_COEFF_CALORIE_2 * self.weight)
                           * self.duration * 60)
         return spent_calories
 
