@@ -115,12 +115,14 @@ class Swimming(Training):
         return spent_calories
 
 
-def read_package(workout_type: str, data: list[int]) -> Training:
+def read_package(workout_type: str, data: list) -> Training:
     dictionary_of_type_trainings = {'SWM': Swimming,
                                     'RUN': Running,
                                     'WLK': SportsWalking}
     if workout_type in ('SWM', 'RUN', 'WLK'):
         return dictionary_of_type_trainings[workout_type](*data)
+    else:
+        exit(f'Код тренировки {workout_type} не является допустимымым!')
 
 
 def main(training: Training) -> None:
