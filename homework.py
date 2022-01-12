@@ -121,7 +121,6 @@ def read_package(workout_type: str, data: list[int]) -> Training:
                                     'WLK': SportsWalking}
     if workout_type in ('SWM', 'RUN', 'WLK'):
         return dictionary_of_type_trainings[workout_type](*data)
-    
 
 
 def main(training: Training) -> None:
