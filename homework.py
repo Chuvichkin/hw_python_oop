@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import List
 
 
 @dataclass
@@ -115,12 +116,11 @@ class Swimming(Training):
         return spent_calories
 
 
-def read_package(workout_type: str, data: list) -> Training:
+def read_package(workout_type: str, data: List[int]) -> Training:
     dictionary_of_type_trainings: dict[str, str] = {'SWM': Swimming,
                                                     'RUN': Running,
                                                     'WLK': SportsWalking}
-    if (workout_type in ('SWM', 'RUN', 'WLK')
-       and any(isinstance(x, int) for x in data)):
+    if workout_type in ('SWM', 'RUN', 'WLK'):
         return dictionary_of_type_trainings[workout_type](*data)
     else:
         exit(f'Проверьте входные данные данные тренировки {workout_type}!')
