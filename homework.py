@@ -116,13 +116,14 @@ class Swimming(Training):
 
 
 def read_package(workout_type: str, data: list) -> Training:
-    dictionary_of_type_trainings = {'SWM': Swimming,
-                                    'RUN': Running,
-                                    'WLK': SportsWalking}
-    if workout_type in ('SWM', 'RUN', 'WLK') and any(isinstance(x, int) for x in data):
+    dictionary_of_type_trainings: dict[str, str] = {'SWM': Swimming,
+                                                    'RUN': Running,
+                                                    'WLK': SportsWalking}
+    if (workout_type in ('SWM', 'RUN', 'WLK')
+       and any(isinstance(x, int) for x in data)):
         return dictionary_of_type_trainings[workout_type](*data)
     else:
-        exit(f'Код тренировки {workout_type} не является допустимымым!')
+        exit(f'Проверьте входные данные данные тренировки {workout_type}!')
 
 
 def main(training: Training) -> None:
@@ -132,8 +133,8 @@ def main(training: Training) -> None:
 
 if __name__ == '__main__':
     packages = [
-        ('SWM', [720, 1, 80, 25, 40]),
-        ('RUNv', [15000, 1, 75n]),
+        ('SWM', [720, 1, 80, 25.5, 40]),
+        ('RUN', [15000, 1, 75]),
         ('WLK', [9000, 1, 75, 180]),
     ]
 
