@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List
+from typing import List, Type
 
 
 @dataclass
@@ -117,13 +117,13 @@ class Swimming(Training):
 
 
 def read_package(workout_type: str, data: List[int]) -> Training:
-    dictionary_of_type_trainings: dict[str, str] = {'SWM': Swimming,
-                                                    'RUN': Running,
-                                                    'WLK': SportsWalking}
-    if workout_type in ('SWM', 'RUN', 'WLK'):
-        return dictionary_of_type_trainings[workout_type](*data)
-    else:
-        exit(f'Проверьте входные данные данные тренировки {workout_type}!')
+    training_codes_types: dict[str, Type[Training]] = {'SWM': Swimming,
+                                                       'RUN': Running,
+                                                       'WLK': SportsWalking}
+    try:
+        return training_codes_types[workout_type](*data)
+    except KeyError:
+        raise KeyError(f'Проверьте входные данные тренировки {workout_type}!')
 
 
 def main(training: Training) -> None:
@@ -133,8 +133,8 @@ def main(training: Training) -> None:
 
 if __name__ == '__main__':
     packages = [
-        ('SWM', [720, 1, 80, 25.5, 40]),
-        ('RUN', [15000, 1, 75]),
+        ('SWM', [720, 1, 80, 25, 40]),
+        ('RUNn', [15000, 1, 75]),
         ('WLK', [9000, 1, 75, 180]),
     ]
 
